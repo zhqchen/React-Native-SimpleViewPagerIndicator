@@ -3,7 +3,6 @@ package com.rna.indicator;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.simpleviewpagerindicator.BuildConfig;
 
 import java.util.Arrays;
 import java.util.List;
