@@ -29,11 +29,14 @@ var IndicatorTopView = React.createClass({
         progress: React.PropTypes.object,//由页码和滑动比例组成的对象
         tabBackgroundColor: React.PropTypes.string, //单个标题区域的背景
         tabDivideLineColor: React.PropTypes.string, //单个标题区域的背景
+        isNeedTabDivideLine: React.PropTypes.bool, //是否需要tab的分隔线
     },
 
     //一些初始默认值
     getDefaultProps: function () {
         return {
+            initialPage: 0,
+            isNeedTabDivideLine: true,
             scrollLineHeight: 2,
             scrollLineColor: '#fdb933',
             tabTextSize: 16,
@@ -90,7 +93,7 @@ var IndicatorTopView = React.createClass({
                             {pageTitles[i]}
                         </Text>
                         {
-                            i < pageTitles.length - 1 && <View style={tabDivideLineStyle}/>
+                            this.props.isNeedTabDivideLine && i < pageTitles.length - 1 && <View style={tabDivideLineStyle}/>
                         }
                     </View>
                 </TouchableOpacity>
