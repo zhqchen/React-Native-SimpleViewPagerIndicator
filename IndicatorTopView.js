@@ -28,7 +28,7 @@ var IndicatorTopView = React.createClass({
         tabTextHighLightColor: React.PropTypes.string,//当前标题的高亮颜色
         progress: React.PropTypes.object,//由页码和滑动比例组成的对象
         tabBackgroundColor: React.PropTypes.string, //单个标题区域的背景
-        tabDivideLineColor: React.PropTypes.string, //单个标题区域的背景
+        tabDivideLineColor: React.PropTypes.string, //tab分隔线的颜色
         isNeedTabDivideLine: React.PropTypes.bool, //是否需要tab的分隔线
     },
 
