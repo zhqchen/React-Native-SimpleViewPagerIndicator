@@ -49,7 +49,7 @@ var SimpleViewPagerIndicator = React.createClass({
 
     getInitialState: function () {
         return {
-            page: 0,
+            page: this.props.initialPage,
             animationsAreEnabled: true,//是否运行动画
             progress: {
                 position: this.props.initialPage,
@@ -78,6 +78,9 @@ var SimpleViewPagerIndicator = React.createClass({
 
     //切换到第page页
     goToPage: function (page) {
+        if(this.state.page === page) {
+            return;
+        }
         if (this.state.animationsAreEnabled) {
             this.viewPager.setPage(page);
         } else {

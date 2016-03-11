@@ -14,6 +14,8 @@ var {
     TouchableOpacity,
     } = React;
 
+var TAB_VIEW_HEIGHT = 40;
+
 var IndicatorTopView = React.createClass({
 
     propTypes: {
@@ -37,10 +39,12 @@ var IndicatorTopView = React.createClass({
         var marginLeft = SCROLL_LINE_WIDTH * (progress.position + progress.offset);
 
         const scrollLineStyle = {
+            position : 'absolute',
             height: this.props.scrollLineHeight,
             width: SCROLL_LINE_WIDTH,
             backgroundColor: this.props.scrollLineColor,
             marginLeft: marginLeft,
+            top: TAB_VIEW_HEIGHT - this.props.scrollLineHeight,
         };
 
         var tabViews = [];
@@ -68,7 +72,7 @@ var IndicatorTopView = React.createClass({
         }
 
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.tabContainer}>
                     {tabViews}
                 </View>
@@ -82,6 +86,11 @@ var IndicatorTopView = React.createClass({
 });
 
 var styles = StyleSheet.create({
+
+    container: {
+        height: TAB_VIEW_HEIGHT,
+        justifyContent: 'center',
+    },
 
     tabContainer: {
         flexDirection: 'row',
