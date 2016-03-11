@@ -9,7 +9,8 @@ a simple kind of accomplishment of ViewPagerIndicator on Android, need combined 
 3. run npm install
 4. run react-native run-android
 
-## props of IndicatorTopView
+## props of SimpleViewPagerIndicator
+```
 1. initialPage: 数值型, 初始切换tab的索引位置
 2. pageTitles: 数组型, 标题数组
 3. goToPage: 函数型, 点击tab的响应事件
@@ -22,3 +23,32 @@ a simple kind of accomplishment of ViewPagerIndicator on Android, need combined 
 10. tabBackgroundColor: 数值型, 单个标题区域的背景
 11. tabDivideLineColor: 数值型, tab分隔线的颜色
 12. isNeedTabDivideLine: 字符串型, 是否需要tab的分隔线
+```
+
+## example usage
+```
+var SimpleViewPagerIndicator = require('./SimpleViewPagerIndicator');
+var PAGE_TITLES = ['item1', 'item2', 'item3'];
+var ViewPagerIndicatorExample = React.createClass({
+    render: function () {
+        var pages = [];
+        for (var i = 0; i < PAGE_TITLES.length; i++) {
+            pages.push(
+                <Text style={styles.pageText} key={i}>{'this is page of index ' + i}</Text>
+            );
+        }
+
+        return (
+            <SimpleViewPagerIndicator
+                initialPage={1}
+                pageTitles={PAGE_TITLES}
+            >
+                {pages}
+            </SimpleViewPagerIndicator>
+        );
+    },
+});
+```
+
+## TODO
+complement of ios

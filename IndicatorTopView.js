@@ -1,6 +1,5 @@
 /**
- * 轻量级ViewPagerIndicator的实现, 核心利用ViewPagerAndroid的onPageScroll的事件,来重绘指示条
- * Github上另有人实现完整功能 见: react-native-scrollable-tab-view
+ * 滑动指示栏
  * Created by chen on 16/3/2.
  */
 'use strict';
@@ -16,49 +15,6 @@ var {
     } = React;
 
 var IndicatorTopView = React.createClass({
-
-    propTypes: {
-        initialPage: React.PropTypes.number,//初始切换tab的索引位置
-        pageTitles: React.PropTypes.array,//标题数组
-        goToPage: React.PropTypes.func, //点击tab的响应事件
-        scrollLineHeight: React.PropTypes.number,//滑动条的高度
-        scrollLineColor: React.PropTypes.string,//滑动条的颜色
-        tabTextSize: React.PropTypes.number,//标题的字体大小
-        tabTextColor: React.PropTypes.string,//标题的字体默认颜色
-        tabTextHighLightColor: React.PropTypes.string,//当前标题的高亮颜色
-        progress: React.PropTypes.object,//由页码和滑动比例组成的对象
-        tabBackgroundColor: React.PropTypes.string, //单个标题区域的背景
-        tabDivideLineColor: React.PropTypes.string, //tab分隔线的颜色
-        isNeedTabDivideLine: React.PropTypes.bool, //是否需要tab的分隔线
-    },
-
-    //一些初始默认值
-    getDefaultProps: function () {
-        return {
-            initialPage: 0,
-            isNeedTabDivideLine: true,
-            scrollLineHeight: 2,
-            scrollLineColor: '#fdb933',
-            tabTextSize: 16,
-            tabTextColor: '#9a9a9a',
-            tabTextHighLightColor: '#fdb933',
-            tabBackgroundColor: 'white',
-            tabDivideLineColor: '#dce1e8',
-            progress: {
-                page: 0,
-                pageOffset: 0,
-            },
-        };
-    },
-
-    getInitialState: function () {
-        return {
-            progress: {
-                page: this.props.initialPage,
-                pageOffset: 0,
-            },
-        };
-    },
 
     render: function () {
         if (this.props.pageTitles === undefined || !this.props.pageTitles || this.props.pageTitles.length === 0) {
