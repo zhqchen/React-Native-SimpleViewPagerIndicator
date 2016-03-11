@@ -18,7 +18,7 @@ var IndicatorTopView = require('./IndicatorTopView');
 var SimpleViewPagerIndicator = React.createClass({
 
     propTypes: {
-        IndicatorViewPosition: React.PropTypes.oneOf(['top', 'bottom']),
+        indicatorViewPosition: React.PropTypes.oneOf(['top', 'bottom']),
         initialPage: React.PropTypes.number,//初始切换tab的索引位置
         pageTitles: React.PropTypes.array,//标题数组
         scrollLineHeight: React.PropTypes.number,//滑动条的高度
@@ -34,7 +34,7 @@ var SimpleViewPagerIndicator = React.createClass({
     //一些初始默认值
     getDefaultProps: function () {
         return {
-            IndicatorViewPosition: 'top',
+            indicatorViewPosition: 'top',
             initialPage: 0,
             isNeedTabDivideLine: true,
             scrollLineHeight: 2,
@@ -111,11 +111,21 @@ var SimpleViewPagerIndicator = React.createClass({
         )
     },
 
+    renderUnderLineView: function () {
+        return (
+            <View style={styles.hLine}/>
+        )
+    },
+
     render: function () {
         return (
             <View style={styles.container}>
                 {
-                    this.props.IndicatorViewPosition === 'top' && this.renderIndicatorView(true)
+                    this.props.indicatorViewPosition === 'top' && this.renderIndicatorView(true)
+                }
+
+                {
+                    this.props.indicatorViewPosition === 'top' && this.renderUnderLineView()
                 }
 
                 <ViewPagerAndroid
@@ -136,9 +146,12 @@ var SimpleViewPagerIndicator = React.createClass({
                         })
                     }
                 </ViewPagerAndroid>
+                {
+                    this.props.indicatorViewPosition === 'bottom' && this.renderUnderLineView()
+                }
 
                 {
-                    this.props.IndicatorViewPosition === 'bottom' && this.renderIndicatorView(false)
+                    this.props.indicatorViewPosition === 'bottom' && this.renderIndicatorView(false)
                 }
 
             </View>
@@ -165,6 +178,10 @@ var styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    hLine: {
+        height: 0.5,
+        backgroundColor: '#dce1e8',
+    },
 });
 
 module.exports = SimpleViewPagerIndicator;

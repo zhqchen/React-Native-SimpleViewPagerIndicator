@@ -11,18 +11,19 @@ a simple kind of accomplishment of ViewPagerIndicator on Android, need combined 
 
 ## props of SimpleViewPagerIndicator
 ```
-1. initialPage: 数值型, 初始切换tab的索引位置
-2. pageTitles: 数组型, 标题数组
-3. goToPage: 函数型, 点击tab的响应事件
-4. scrollLineHeight: 数值型, 滑动条的高度
-5. scrollLineColor: 字符串型, 滑动条的颜色, 如 '#ffffff'
-6. tabTextSize: 数值型, 标题的字体大小
-7. tabTextColor: 字符串型, 标题的字体默认颜色
-8. tabTextHighLightColor: 字符串型, 当前标题的高亮颜色
-9. progress: 对象型, 由页码和滑动比例组成的对象,如progress: {page: 0, pageOffset: 0}
-10. tabBackgroundColor: 数值型, 单个标题区域的背景
-11. tabDivideLineColor: 数值型, tab分隔线的颜色
-12. isNeedTabDivideLine: 字符串型, 是否需要tab的分隔线
+indicatorViewPosition: 字符串型, 'top': 指示栏在顶部, 'bottom': 指示栏在底部
+initialPage: 数值型, 初始切换tab的索引位置
+pageTitles: 数组型, 标题数组
+goToPage: 函数型, 点击tab的响应事件
+scrollLineHeight: 数值型, 滑动条的高度
+scrollLineColor: 字符串型, 滑动条的颜色, 如 '#ffffff'
+tabTextSize: 数值型, 标题的字体大小
+tabTextColor: 字符串型, 标题的字体默认颜色
+tabTextHighLightColor: 字符串型, 当前标题的高亮颜色
+progress: 对象型, 由页码和滑动比例组成的对象,如progress: {page: 0, pageOffset: 0}
+tabBackgroundColor: 数值型, 单个标题区域的背景
+tabDivideLineColor: 数值型, tab分隔线的颜色
+isNeedTabDivideLine: 字符串型, 是否需要tab的分隔线
 ```
 
 ## example usage
