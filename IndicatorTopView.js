@@ -16,6 +16,17 @@ var {
 
 var IndicatorTopView = React.createClass({
 
+    propTypes: {
+        isNeedScrollLine: React.PropTypes.bool, //是否需要滑动条
+    },
+
+    //一些初始默认值
+    getDefaultProps: function () {
+        return {
+            isNeedScrollLine: true,
+        };
+    },
+
     render: function () {
         if (this.props.pageTitles === undefined || !this.props.pageTitles || this.props.pageTitles.length === 0) {
             return;
@@ -61,7 +72,9 @@ var IndicatorTopView = React.createClass({
                 <View style={styles.tabContainer}>
                     {tabViews}
                 </View>
-                <View style={scrollLineStyle}/>
+                {
+                    this.props.isNeedScrollLine === true && <View style={scrollLineStyle}/>
+                }
             </View>
         );
     },

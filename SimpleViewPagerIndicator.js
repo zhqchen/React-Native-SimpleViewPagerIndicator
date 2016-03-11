@@ -18,6 +18,7 @@ var IndicatorTopView = require('./IndicatorTopView');
 var SimpleViewPagerIndicator = React.createClass({
 
     propTypes: {
+        IndicatorViewPosition: React.PropTypes.oneOf(['top', 'bottom']),
         initialPage: React.PropTypes.number,//初始切换tab的索引位置
         pageTitles: React.PropTypes.array,//标题数组
         scrollLineHeight: React.PropTypes.number,//滑动条的高度
@@ -33,6 +34,7 @@ var SimpleViewPagerIndicator = React.createClass({
     //一些初始默认值
     getDefaultProps: function () {
         return {
+            IndicatorViewPosition: 'top',
             initialPage: 0,
             isNeedTabDivideLine: true,
             scrollLineHeight: 2,
@@ -89,24 +91,32 @@ var SimpleViewPagerIndicator = React.createClass({
         return React.Children.map(this.props.children, (child)=> child);
     },
 
+    renderIndicatorView: function (isNeedScrollLine: Boolean) {
+        return (
+            <IndicatorTopView
+                isNeedScrollLine = {isNeedScrollLine}
+                initialPage={this.props.initialPage}
+                pageTitles={this.props.pageTitles}
+                scrollLineHeight={this.props.scrollLineHeight}
+                scrollLineColor={this.props.scrollLineColor}
+                tabTextSize={this.props.tabTextSize}
+                tabTextColor={this.props.tabTextColor}
+                tabTextHighLightColor={this.props.tabTextHighLightColor}
+                tabBackgroundColor={this.props.tabBackgroundColor}
+                tabDivideLineColor={this.props.tabDivideLineColor}
+                isNeedTabDivideLine={this.props.isNeedTabDivideLine}
+                progress={this.state.progress}
+                goToPage={(page)=>this.goToPage(page)}
+            />
+        )
+    },
+
     render: function () {
         return (
             <View style={styles.container}>
-
-                <IndicatorTopView
-                    initialPage={this.props.initialPage}
-                    pageTitles={this.props.pageTitles}
-                    scrollLineHeight={this.props.scrollLineHeight}
-                    scrollLineColor={this.props.scrollLineColor}
-                    tabTextSize={this.props.tabTextSize}
-                    tabTextColor={this.props.tabTextColor}
-                    tabTextHighLightColor={this.props.tabTextHighLightColor}
-                    tabBackgroundColor={this.props.tabBackgroundColor}
-                    tabDivideLineColor={this.props.tabDivideLineColor}
-                    isNeedTabDivideLine={this.props.isNeedTabDivideLine}
-                    progress={this.state.progress}
-                    goToPage={(page)=>this.goToPage(page)}
-                />
+                {
+                    this.props.IndicatorViewPosition === 'top' && this.renderIndicatorView(true)
+                }
 
                 <ViewPagerAndroid
                     ref={viewPager => { this.viewPager = viewPager; }}
@@ -126,6 +136,10 @@ var SimpleViewPagerIndicator = React.createClass({
                         })
                     }
                 </ViewPagerAndroid>
+
+                {
+                    this.props.IndicatorViewPosition === 'bottom' && this.renderIndicatorView(false)
+                }
 
             </View>
         );
