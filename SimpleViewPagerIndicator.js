@@ -18,7 +18,8 @@ var IndicatorTopView = require('./IndicatorTopView');
 var SimpleViewPagerIndicator = React.createClass({
 
     propTypes: {
-        indicatorViewPosition: React.PropTypes.oneOf(['top', 'bottom']),
+        tabTitleMode: React.PropTypes.oneOf(['text', 'icon']),//指示栏标题的模式, 文本模式或图标模式
+        indicatorViewPosition: React.PropTypes.oneOf(['top', 'bottom']),//指示栏的位置, 上部或下部
         initialPage: React.PropTypes.number,//初始切换tab的索引位置
         pageTitles: React.PropTypes.array,//标题数组
         scrollLineHeight: React.PropTypes.number,//滑动条的高度
@@ -27,23 +28,22 @@ var SimpleViewPagerIndicator = React.createClass({
         tabTextColor: React.PropTypes.string,//标题的字体默认颜色
         tabTextHighLightColor: React.PropTypes.string,//当前标题的高亮颜色
         tabBackgroundColor: React.PropTypes.string, //单个标题区域的背景
-        tabDivideLineColor: React.PropTypes.string, //tab分隔线的颜色
         isNeedTabDivideLine: React.PropTypes.bool, //是否需要tab的分隔线
     },
 
     //一些初始默认值
     getDefaultProps: function () {
         return {
+            tabTitleMode: 'text',
             indicatorViewPosition: 'top',
             initialPage: 0,
             isNeedTabDivideLine: true,
             scrollLineHeight: 2,
-            scrollLineColor: '#fdb933',
+            scrollLineColor: 'white',
             tabTextSize: 16,
-            tabTextColor: '#9a9a9a',
-            tabTextHighLightColor: '#fdb933',
-            tabBackgroundColor: 'white',
-            tabDivideLineColor: '#dce1e8',
+            tabTextColor: '#e9ecf1',
+            tabTextHighLightColor: 'white',
+            tabBackgroundColor: '#f35959',//初始设置和手机状态栏一致
         };
     },
 
@@ -98,6 +98,7 @@ var SimpleViewPagerIndicator = React.createClass({
         return (
             <IndicatorTopView
                 isNeedScrollLine = {isNeedScrollLine}
+                tabTitleMode={this.props.tabTitleMode}
                 initialPage={this.props.initialPage}
                 pageTitles={this.props.pageTitles}
                 scrollLineHeight={this.props.scrollLineHeight}

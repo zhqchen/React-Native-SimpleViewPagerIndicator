@@ -11,7 +11,7 @@ var {
     Image,
     Text,
     Dimensions,
-    TouchableOpacity,
+    TouchableNativeFeedback,
     } = React;
 
 var TAB_VIEW_HEIGHT = 40;
@@ -39,7 +39,7 @@ var IndicatorTopView = React.createClass({
         var marginLeft = SCROLL_LINE_WIDTH * (progress.position + progress.offset);
 
         const scrollLineStyle = {
-            position : 'absolute',
+            position: 'absolute',
             height: this.props.scrollLineHeight,
             width: SCROLL_LINE_WIDTH,
             backgroundColor: this.props.scrollLineColor,
@@ -51,23 +51,26 @@ var IndicatorTopView = React.createClass({
         var pageTitles = this.props.pageTitles;
 
         var singleTabContainerStyle = [styles.singleTabContainer, {backgroundColor: this.props.tabBackgroundColor}];
-        var tabDivideLineStyle = [styles.tabVerticalLine, {backgroundColor: this.props.tabDivideLineColor}];
 
         for (var i = 0; i < pageTitles.length; i++) {
             const key = i;
             tabViews.push(
-                <TouchableOpacity style={styles.rowFlex} key={key} onPress={()=>this.props.goToPage(key)} opacity={0.6}>
+                <TouchableNativeFeedback
+                    style={styles.rowFlex} key={key}
+                    onPress={()=>this.props.goToPage(key)}
+                    background={TouchableNativeFeedback.Ripple()}>
                     <View style={singleTabContainerStyle}>
-                        <Text
-                            numberOfLines={1}
-                            style={[styles.tabTextStyle,{fontSize: this.props.tabTextSize, color: progress.position === i ? this.props.tabTextHighLightColor : this.props.tabTextColor}]}>
-                            {pageTitles[i]}
-                        </Text>
                         {
-                            this.props.isNeedTabDivideLine && i < pageTitles.length - 1 && <View style={tabDivideLineStyle}/>
+                            this.props.tabTitleMode === 'icon' ?
+                                <Image style={styles.tabIconStyle} source={{uri: pageTitles[i]}}/> :
+                                <Text
+                                    numberOfLines={1}
+                                    style={[styles.tabTextStyle,{fontSize: this.props.tabTextSize, color: progress.position === i ? this.props.tabTextHighLightColor : this.props.tabTextColor}]}>
+                                    {pageTitles[i]}
+                                </Text>
                         }
                     </View>
-                </TouchableOpacity>
+                </TouchableNativeFeedback>
             )
         }
 
@@ -107,15 +110,17 @@ var styles = StyleSheet.create({
         alignItems: 'center',
     },
 
+    tabIconStyle: {
+        flex: 1,
+        height: TAB_VIEW_HEIGHT,
+        marginRight: 3,
+        resizeMode: 'contain',
+    },
+
     tabTextStyle: {
         flex: 1,
         margin: 10,
         textAlign: 'center',
-    },
-
-    tabVerticalLine: {
-        height: 14,
-        width: 0.5
     },
 
 });

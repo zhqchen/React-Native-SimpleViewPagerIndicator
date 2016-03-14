@@ -13,7 +13,8 @@ var {
 
 var SimpleViewPagerIndicator = require('./SimpleViewPagerIndicator');
 
-var PAGE_TITLES = ['item1', 'item2', 'item3'];
+var PAGE_TITLES = ['item0', 'item1', 'item2'];
+var PAGE_TITLES2 = ['ic_alarm_white_24dp', 'ic_grade_white_24dp', 'ic_work_white_24dp'];
 
 var ViewPagerIndicatorExample = React.createClass({
 
@@ -30,6 +31,7 @@ var ViewPagerIndicatorExample = React.createClass({
             <SimpleViewPagerIndicator
                 initialPage={1}
                 pageTitles={PAGE_TITLES}
+                tabTitleMode={'text'}
             >
                 {pages}
             </SimpleViewPagerIndicator>

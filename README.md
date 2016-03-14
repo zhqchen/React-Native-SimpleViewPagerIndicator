@@ -11,9 +11,10 @@ a simple kind of accomplishment of ViewPagerIndicator on Android, need combined 
 
 ## props of SimpleViewPagerIndicator
 ```
-indicatorViewPosition: 字符串型, 'top': 指示栏在顶部, 'bottom': 指示栏在底部
+tabTitleMode: 字符串型, 指示栏标题的模式, 'text': 文本模式, 'icon': 图标模式
+indicatorViewPosition: 字符串型, 指示栏位置, 'top': 指示栏在顶部, 'bottom': 指示栏在底部
 initialPage: 数值型, 初始切换tab的索引位置
-pageTitles: 数组型, 标题数组
+pageTitles: 数组型, 标题数组, 当tabTitleMode为text时为标题文本数组; 当tabTitleMode为icon时为标题图标的url数组
 goToPage: 函数型, 点击tab的响应事件
 scrollLineHeight: 数值型, 滑动条的高度
 scrollLineColor: 字符串型, 滑动条的颜色, 如 '#ffffff'
