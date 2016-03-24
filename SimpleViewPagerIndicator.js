@@ -28,7 +28,6 @@ var SimpleViewPagerIndicator = React.createClass({
         tabTextColor: React.PropTypes.string,//标题的字体默认颜色
         tabTextHighLightColor: React.PropTypes.string,//当前标题的高亮颜色
         tabBackgroundColor: React.PropTypes.string, //单个标题区域的背景
-        isNeedTabDivideLine: React.PropTypes.bool, //是否需要tab的分隔线
     },
 
     //一些初始默认值
@@ -108,7 +107,6 @@ var SimpleViewPagerIndicator = React.createClass({
                 tabTextHighLightColor={this.props.tabTextHighLightColor}
                 tabBackgroundColor={this.props.tabBackgroundColor}
                 tabDivideLineColor={this.props.tabDivideLineColor}
-                isNeedTabDivideLine={this.props.isNeedTabDivideLine}
                 progress={this.state.progress}
                 goToPage={(page)=>this.goToPage(page)}
             />
