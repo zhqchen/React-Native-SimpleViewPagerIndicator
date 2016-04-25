@@ -12,9 +12,12 @@ var {
     Text,
     Dimensions,
     TouchableNativeFeedback,
+    Animated,
     } = React;
 
 var TAB_VIEW_HEIGHT = 40;
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 var IndicatorTopView = React.createClass({
 
@@ -29,22 +32,40 @@ var IndicatorTopView = React.createClass({
         };
     },
 
+    getInitialState: function () {
+        return {
+            animateScrollValue: new Animated.Value(0),
+            scrollLineWidth: 0,
+            currentPosition: 0,
+        };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        var progress = nextProps.progress;
+        var SCROLL_LINE_WIDTH = SCREEN_WIDTH / nextProps.pageTitles.length;
+        var marginLeft = SCROLL_LINE_WIDTH * (progress.position + progress.offset);
+        this.state.animateScrollValue.setValue(marginLeft);
+        this.setState({
+            scrollLineWidth: SCROLL_LINE_WIDTH,
+            currentPosition: progress.position,
+        });
+    },
+
     render: function () {
         if (this.props.pageTitles === undefined || !this.props.pageTitles || this.props.pageTitles.length === 0) {
             return;
         }
 
-        var SCROLL_LINE_WIDTH = Dimensions.get('window').width / this.props.pageTitles.length;
-        var progress = this.props.progress;
-        var marginLeft = SCROLL_LINE_WIDTH * (progress.position + progress.offset);
-
         const scrollLineStyle = {
             position: 'absolute',
-            height: this.props.scrollLineHeight,
-            width: SCROLL_LINE_WIDTH,
-            backgroundColor: this.props.scrollLineColor,
-            marginLeft: marginLeft,
             top: TAB_VIEW_HEIGHT - this.props.scrollLineHeight,
+            height: this.props.scrollLineHeight,
+            width: this.state.scrollLineWidth,
+            backgroundColor: this.props.scrollLineColor,
+        };
+
+        const scrollLinePositionStyle = {
+            left: this.state.animateScrollValue,
         };
 
         var tabViews = [];
@@ -65,7 +86,7 @@ var IndicatorTopView = React.createClass({
                                 <Image style={styles.tabIconStyle} source={{uri: pageTitles[i]}}/> :
                                 <Text
                                     numberOfLines={1}
-                                    style={[styles.tabTextStyle,{fontSize: this.props.tabTextSize, color: progress.position === i ? this.props.tabTextHighLightColor : this.props.tabTextColor}]}>
+                                    style={[styles.tabTextStyle,{fontSize: this.props.tabTextSize, color: this.state.currentPosition === i ? this.props.tabTextHighLightColor : this.props.tabTextColor}]}>
                                     {pageTitles[i]}
                                 </Text>
                         }
@@ -80,7 +101,7 @@ var IndicatorTopView = React.createClass({
                     {tabViews}
                 </View>
                 {
-                    this.props.isNeedScrollLine === true && <View style={scrollLineStyle}/>
+                    this.props.isNeedScrollLine === true && <Animated.View style={[scrollLineStyle, scrollLinePositionStyle]}/>
                 }
             </View>
         );
